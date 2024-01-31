@@ -15,9 +15,8 @@ namespace Services.Functions
     {
         public static DataTable SelectUsers()
         {
-            try
-            {
-                connection.Open();
+            connection.Open();
+            try {
                 using (SqlCommand cmd = new SqlCommand("Sp_Select_Users", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -40,7 +39,7 @@ namespace Services.Functions
             }
         }
 
-        public static DataTable FindUser(string id)
+        public static DataTable FindUser(string username)
         {
             connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
@@ -50,7 +49,7 @@ namespace Services.Functions
                 using (SqlCommand cmd = new SqlCommand("Sp_Find_Users", connection, transaction))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@pUsername", id);
+                    cmd.Parameters.AddWithValue("@pUsername", username);
                     cmd.ExecuteNonQuery();
                     transaction.Commit();
 
@@ -73,7 +72,7 @@ namespace Services.Functions
             }
         }
 
-        public static string InsertUsers(Users nuevo)
+        public static string InsertUser(Users newUser)
         {
             connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
@@ -83,10 +82,10 @@ namespace Services.Functions
                 using(SqlCommand cmd = new SqlCommand("Sp_Insert_Users", connection, transaction))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@pUsername", nuevo.username);
-                    cmd.Parameters.AddWithValue("@pName", nuevo.name);
-                    cmd.Parameters.AddWithValue("@pEmail", nuevo.email);
-                    cmd.Parameters.AddWithValue("@pPassword", nuevo.password);
+                    cmd.Parameters.AddWithValue("@pUsername", newUser.username);
+                    cmd.Parameters.AddWithValue("@pName", newUser.name);
+                    cmd.Parameters.AddWithValue("@pEmail", newUser.email);
+                    cmd.Parameters.AddWithValue("@pPassword", newUser.password);
                     cmd.ExecuteNonQuery();
 
                     transaction.Commit();
@@ -104,7 +103,7 @@ namespace Services.Functions
             }
         }
 
-        public static string UpdateUsers(Users nuevo)
+        public static string UpdateUser(Users editUser)
         {
             connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
@@ -114,14 +113,14 @@ namespace Services.Functions
                 using (SqlCommand cmd = new SqlCommand("Sp_Update_Users", connection, transaction))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@pUsername", nuevo.username);
-                    cmd.Parameters.AddWithValue("@pName", nuevo.name);
-                    cmd.Parameters.AddWithValue("@pEmail", nuevo.email);
-                    cmd.Parameters.AddWithValue("@pPassword", nuevo.password);
+                    cmd.Parameters.AddWithValue("@pUsername", editUser.username);
+                    cmd.Parameters.AddWithValue("@pName", editUser.name);
+                    cmd.Parameters.AddWithValue("@pEmail", editUser.email);
+                    cmd.Parameters.AddWithValue("@pPassword", editUser.password);
                     cmd.ExecuteNonQuery();
 
                     transaction.Commit();
-                    return "User update";
+                    return "Update";
                 }
             }
             catch (Exception ex)
@@ -135,7 +134,7 @@ namespace Services.Functions
             }
         }
 
-        public static string DeleteUsers(string id)
+        public static string DeleteUser(string username)
         {
             connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
@@ -145,11 +144,11 @@ namespace Services.Functions
                 using (SqlCommand cmd = new SqlCommand("Sp_Delete_Users", connection, transaction))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@pUsername", id);
+                    cmd.Parameters.AddWithValue("@pUsername", username);
                     cmd.ExecuteNonQuery();
 
                     transaction.Commit();
-                    return "User Delete";
+                    return "Delete";
                 }
             }
             catch (Exception ex)
