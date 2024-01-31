@@ -23,30 +23,30 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("api/users/find/{id}")]
-        public DataTable Find(string id)
+        public DataTable Find(string username)
         {
-            return FindUser(id);
+            return FindUser(username);
         }
 
         [HttpPost]
         [Route("api/users/insert")]
-        public string Insert([FromBody] Users nuevo)
+        public string Insert([FromBody] Users newUser)
         {
-            return InsertUsers(nuevo);
+            return InsertUser(newUser);
         }
 
         [HttpPut]
         [Route("api/users/update/{id}")]
-        public string Update([FromBody] Users nuevo)
+        public string Update([FromBody] Users editUser)
         {
-            return UpdateUsers(nuevo);
+            return UpdateUser(editUser);
         }
 
         [HttpDelete]
         [Route("api/users/delete/{id}")]
-        public string Delete(string id)
+        public string Delete(string username)
         {
-            return DeleteUsers(id);
+            return DeleteUser(username);
         }
     }
 }
