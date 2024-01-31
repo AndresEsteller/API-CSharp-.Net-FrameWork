@@ -22,7 +22,7 @@ namespace API.Controllers
 
 
         [HttpGet]
-        [Route("api/users/find/{id}")]
+        [Route("api/users/find/{username}")]
         public DataTable Find(string username)
         {
             return FindUser(username);
@@ -43,7 +43,7 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        [Route("api/users/delete/{id}")]
+        [Route("api/users/delete/{username}")]
         public string Delete(string username)
         {
             return DeleteUser(username);
