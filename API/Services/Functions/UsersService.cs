@@ -64,8 +64,8 @@ namespace Services.Functions
             }
             catch (Exception)
             {
-                message = ex.Message;
                 transaction.Rollback();
+                message = ex.Message;
                 return null;
             }
             finally
