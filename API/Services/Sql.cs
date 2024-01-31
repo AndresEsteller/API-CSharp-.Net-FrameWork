@@ -10,8 +10,8 @@ namespace Services
 {
     public static class Sql
     {
-        private const string cadenaSql = "Server=localhost;Database=DB;Trusted_Connection=True;";
-        public static SqlConnection connection = new SqlConnection(cadenaSql);
+        private const string sqlString = "Server=localhost;Database=DB;Trusted_Connection=True;";
+        public static SqlConnection connection = new SqlConnection(sqlString);
         public static string message = "";
     }
 }
