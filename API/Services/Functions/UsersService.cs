@@ -16,7 +16,8 @@ namespace Services.Functions
         public static DataTable SelectUsers()
         {
             connection.Open();
-            try {
+            try 
+            {
                 using (SqlCommand cmd = new SqlCommand("Sp_Select_Users", connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
